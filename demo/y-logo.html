@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js Yudiz</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="js/p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="js/prog/triangle.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+
+  var mycolor;
+  var t = [], highlight = [], normal = [];
+
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+    background(234, 226, 228);
+
+    let clr = color('rgba(20, 159, 132, 255)');
+    t[0] = new Triangle(-50,40,50,40,0,-40,clr,210,120, 0);
+
+    clr = color(39, 184, 153);
+    t[1] = new Triangle(-50,40,50,40,0,-40,clr,210,200, 180);
+
+    clr = color(136, 74, 157);
+    t[2] = new Triangle(-50,40,50,40,0,-40,clr,260,200, 0);
+
+    clr = color(132, 121, 180);
+    t[3] = new Triangle(-50,40,50,40,0,-40,clr,260,280, 180);
+
+    clr = color(12, 28, 61);
+    t[4] = new Triangle(-50,40,50,40,0,-40,clr,480,120, 180);
+
+    clr = color(61, 72, 100);
+    t[5] = new Triangle(-50,40,50,40,0,-40,clr,430,120, 0);
+
+    clr = color(41, 127, 184);
+    t[6] = new Triangle(-50,40,50,40,0,-40,clr,430,200, 180);
+
+    clr = color(59, 149, 211);
+    t[7] = new Triangle(-50,40,50,40,0,-40,clr,380,200, 0);
+
+    clr = color(190, 59, 43);
+    t[8] = new Triangle(-50,40,50,40,0,-40,clr,380,280, 180);
+
+    clr = color(228, 75, 58);
+    t[9] = new Triangle(-50,40,50,40,0,-40,clr,330,280, 0);
+
+    clr = color(240, 155, 30);
+    t[10] = new Triangle(-50,40,50,40,0,-40,clr,330,360, 180);
+
+    clr = color(237, 195, 24);
+    t[11] = new Triangle(-50,40,50,40,0,-40,clr,280,360, 0);
+
+  } 
+
+  function draw() {
+    noStroke();
+    angleMode(DEGREES);
+
+    translate (width / 3, height / 3);
+
+    highlight = [];
+    normal = [];
+    
+    for(let i = 0; i < 12; i++){
+    	if(t[i].isMouseHere()){
+        highlight.push(t[i]);
+      }
+      else{
+        normal.push(t[i]);
+      }
+    }
+    
+    background(234, 226, 228);
+    
+    normal.forEach(function(element){
+      element.display();
+    });
+    
+    highlight.forEach(function(element) {
+    	element.highlight(); 
+  	});
+  }    
+
+	function mouseDragged(){
+    highlight.forEach(function(element) {
+      	element.check();
+    });
+  }
+
+	function mouseReleased(){
+	highlight.forEach(function(element) {
+	element.reposition();
+	});
+	}
+
+  /************ Simple Triangle Y Shape ******************/
+  // var mycolor;
+
+  // function setup() {
+  //   createCanvas(1920, 970);
+  //   background(234, 226, 228);
+  // } 
+
+  // function draw() {
+  //   noStroke();
+  //   angleMode(DEGREES);
+  //   rectMode(CENTER);
+  //   translate (width / 3, height / 3);
+
+ 
+  //   push();
+  //   fill(20, 159, 132);
+  //   translate(210,120);
+  //   mycolor = get(mouseX, mouseY);
+  //   if(mouseIsPressed)
+  //   {
+  //     strokeWeight(10);
+  //     stroke(255, 255, 255);
+  //   }
+  //   else{
+  //     background(234, 226, 228);
+  //     noStroke();
+  //   }
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+   
+  //   fill(39, 184, 153);
+  //   push();
+  //   translate(210,200);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(136, 74, 157);
+  //   push();
+  //   translate(260,200);
+  //   rotate(0);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(132, 121, 180);
+  //   push();
+  //   translate(260,280);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(12, 28, 61);
+  //   push();
+  //   translate(480,120);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(61, 72, 100);
+  //   push();
+  //   translate(430,120);
+  //   rotate(0);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(41, 127, 184);
+  //   push();
+  //   translate(430,200);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(59, 149, 211);
+  //   push();
+  //   translate(380,200);
+  //   rotate(0);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(190, 59, 43);
+  //   push();
+  //   translate(380,280);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(228, 75, 58);
+  //   push();
+  //   translate(330,280);
+  //   rotate(0);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(240, 155, 30);
+  //   push();
+  //   translate(330,360);
+  //   rotate(180);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+
+  //   fill(237, 195, 24);
+  //   push();
+  //   translate(280,360);
+  //   rotate(0);
+  //   triangle(-50,40,50,40,0,-40);
+  //   pop();
+  </script>
+  </body>
+</html>
